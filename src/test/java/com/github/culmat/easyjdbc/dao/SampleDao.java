@@ -1,5 +1,7 @@
 package com.github.culmat.easyjdbc.dao;
 
-public interface SampleDao {
+import java.sql.SQLException;
 
+public interface SampleDao {
+	String greet(String someone) throws SQLException;
 }

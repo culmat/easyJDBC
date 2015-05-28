@@ -26,9 +26,9 @@ public abstract class EasyStatement<T> {
    * Die Verarbeitung besteht typischer Weise aus drei Schritten
    * <ol>
    * <li>Parameter auf dem statement setzen, z.B. <code>stmt.setString(1, "Mustermann");</code></li>
-   * <li>Statement ausführen, .z.B <code>stmt.executeQuery();</code><br/>
-   * (Es sind explizit auch executeUpdate() u.ä. verwendbar)</li>
-   * <li>ResultSet / Rückgabewerte verarbeiten</li>
+   * <li>Statement ausfÃ¼hren, .z.B <code>stmt.executeQuery();</code><br/>
+   * (Es sind explizit auch executeUpdate() u.Ã¤. verwendbar)</li>
+   * <li>ResultSet / RÃ¼ckgabewerte verarbeiten</li>
    * </ol>
    * 
    * @param stmt

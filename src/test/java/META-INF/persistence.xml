@@ -7,10 +7,10 @@
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
     <properties>
-      <property name="javax.persistence.jdbc.driver" value="com.ibm.db2.jcc.DB2Driver" />
-      <property name="javax.persistence.jdbc.url" value="jdbc:db2://host:123/db" />
-      <property name="javax.persistence.jdbc.user" value="usr" />
-      <property name="javax.persistence.jdbc.password" value="pwd" />
+      <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+      <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test" />
+      <property name="javax.persistence.jdbc.user" value="" />
+      <property name="javax.persistence.jdbc.password" value="" />
 
       <property name="eclipselink.jdbc.batch-writing" value="JDBC" />
       <property name="eclipselink.cache.shared.default" value="false" />

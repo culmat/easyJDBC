@@ -1,5 +1,7 @@
 package com.github.culmat.easyjdbc.test;
 
+import java.sql.SQLException;
+
 import javax.sql.DataSource;
 
 import org.junit.Assert;
@@ -16,12 +18,13 @@ public class PersistenceXMLTest {
   public void before() throws Exception {
  
     datasource = new PersistenceXmlConnectionHandler()
-      .withSchemaName("differentScheme")
+      .withSchemaName("test")
       .getDataSource("SamplePU");
   }
 
   @Test
-  public void foo() {
-    Assert.fail();
+  public void foo() throws Exception {
+    String schema = datasource.getConnection().getSchema();
+    System.out.println(schema);
   }
 }

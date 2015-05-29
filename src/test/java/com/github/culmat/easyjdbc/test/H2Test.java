@@ -10,8 +10,6 @@ import com.github.culmat.easyjdbc.dao.SampleDaoImpl;
 
 public class H2Test {
 
-
-	
 	private SampleDao dao;
 
 	@Before

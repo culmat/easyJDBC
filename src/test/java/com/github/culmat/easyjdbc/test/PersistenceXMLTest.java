@@ -1,7 +1,5 @@
 package com.github.culmat.easyjdbc.test;
 
-import java.sql.SQLException;
-
 import javax.sql.DataSource;
 
 import org.junit.Assert;
@@ -9,22 +7,23 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.github.culmat.easyjdbc.PersistenceXmlConnectionHandler;
+import com.github.culmat.easyjdbc.dao.SampleDao;
+import com.github.culmat.easyjdbc.dao.SampleDaoImpl;
 
 public class PersistenceXMLTest {
 
-  protected DataSource datasource;
+  private SampleDao dao;
 
-  @Before
-  public void before() throws Exception {
- 
-    datasource = new PersistenceXmlConnectionHandler()
-      .withSchemaName("test")
-      .getDataSource("SamplePU");
-  }
+	@Before
+	public void before() throws Exception {
+		DataSource datasource = new PersistenceXmlConnectionHandler().getDataSource("SamplePU");
+		dao = new SampleDaoImpl(datasource);
+	}
 
-  @Test
-  public void foo() throws Exception {
-    String schema = datasource.getConnection().getSchema();
-    System.out.println(schema);
-  }
+	@Test
+	public void foo() throws Exception {
+		String someone = "World";
+		String actual = dao.greet(someone );
+		Assert.assertEquals("Hello World", actual);
+	}
 }

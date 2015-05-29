@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 public class SampleEJB implements SampleDao {
 	private SampleDao sampleDao;
 
-	@Resource(name = "jdbc/DataSource", mappedName = "TargetPersistenzDataSource", type = DataSource.class)
+	@Resource(name = "jdbc/DataSource", mappedName = "TheAlmightyDataSource", type = DataSource.class)
 	private void setDatasource(DataSource datasource) {
 		sampleDao = new SampleDaoImpl(datasource);
 	}

@@ -16,8 +16,6 @@ public class H2Test {
 	public void before() throws Exception {
 		 JdbcDataSource datasource = new JdbcDataSource();
 		 datasource.setURL("jdbc:h2:mem:test");
-		 datasource.setUser("sa");
-		 datasource.setPassword("sa");
 		 dao = new SampleDaoImpl(datasource);
 	}
 

@@ -1,4 +1,4 @@
-package com.github.culmat.easyjdbc.test;
+package com.github.culmat.easyjdbc.dao.test;
 
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.Assert;

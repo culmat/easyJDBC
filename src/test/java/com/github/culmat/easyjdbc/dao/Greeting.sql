@@ -1,1 +1,1 @@
-SELECT * FROM (VALUES('Hello ' || ?))
+SELECT C1 FROM (VALUES('Hello ' || ?))

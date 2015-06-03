@@ -22,7 +22,7 @@ public class H2Test {
 	@Test
 	public void foo() throws Exception {
 		String someone = "World";
-		String actual = dao.greet(someone );
+		String actual = dao.greet(someone);
 		Assert.assertEquals("Hello World", actual);
 	}
 }

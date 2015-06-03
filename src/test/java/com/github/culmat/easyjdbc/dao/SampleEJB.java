@@ -10,9 +10,10 @@ import javax.sql.DataSource;
 @Stateless
 @Local
 public class SampleEJB implements SampleDao {
+	
 	private SampleDao sampleDao;
 
-	@Resource(name = "jdbc/DataSource", mappedName = "TheAlmightyDataSource", type = DataSource.class)
+	@Resource
 	private void setDatasource(DataSource datasource) {
 		sampleDao = new SampleDaoImpl(datasource);
 	}

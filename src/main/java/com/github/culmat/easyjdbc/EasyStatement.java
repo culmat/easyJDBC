@@ -69,7 +69,9 @@ public abstract class EasyStatement<T> {
    * @return den Inhalt der Resource getClass().getSimpleName() + ".sql" aus dem Klassenpfad.
    */
   protected String readSQLString() {
-    InputStream is = getClass().getResourceAsStream(getClass().getSimpleName() + ".sql");
+    String name = getClass().getSimpleName() + ".sql";
+	InputStream is = getClass().getResourceAsStream(name);
+    if(is == null) log.warning("Could not read resource " +name);
     @SuppressWarnings("resource")
     Scanner s = new Scanner(is).useDelimiter("\\A");
     try {

@@ -11,7 +11,7 @@ public class XBeanProcessor extends BeanProcessor {
 
   public static interface PostProcessor<T> {
     public T postProcess(T value);
-    public Class<T> registerTo();
+    public Class<?> registerTo();
   }
 
   Map<Class<?>, PostProcessor<?>> postProcessors = new HashMap<Class<?>, XBeanProcessor.PostProcessor<?>>();

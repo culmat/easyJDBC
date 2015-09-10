@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -20,10 +21,31 @@ import org.apache.commons.pool2.impl.GenericObjectPool;
 
 
 public abstract class AbstractConnectionHandler {
+	
+  public AbstractConnectionHandler() {
+	  Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+		@Override
+		public void run() {
+			close();			
+		}
+	}));
+	  
+  }
 
-  final Logger log = Logger.getLogger(getClass().getName());
+  protected void close() {
+	for(Entry<String, PoolingDataSource> e : pools.entrySet()){
+		  log.info("Shutting down "+e.getKey());
+		  try {
+			e.getValue().close();
+		} catch (Exception e1) {
+			log.fine(e1.getMessage());
+		}
+	  }
+}
+
+final Logger log = Logger.getLogger(getClass().getName());
   
-  Map<String, DataSource> pools = new HashMap<>();
+  Map<String, PoolingDataSource> pools = new HashMap<>();
   String schemaName = null;
   
   public Connection getConnection(String name) throws SQLException {
@@ -80,12 +102,22 @@ public abstract class AbstractConnectionHandler {
         new PoolingDataSource<PoolableConnection>(connectionPool) {
           @Override
           public Connection getConnection() throws SQLException {
-              Connection ret = super.getConnection();
+        	  try { 
+        		  return tryGetConnection();
+        	  } catch (SQLException e) {
+        		  log.fine(e.getMessage());
+        		  log.fine("retrying");
+        		  return tryGetConnection();
+        	  }
+          }
+
+		private Connection tryGetConnection() throws SQLException {
+			Connection ret = super.getConnection();
               if (schemaName != null) {
                 ret.prepareCall("set schema " + schemaName).execute();
               }
               return ret;
-          }
+		}
     };
     pools.put(name, dataSource);
   }

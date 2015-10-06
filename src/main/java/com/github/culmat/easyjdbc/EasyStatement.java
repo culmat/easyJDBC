@@ -26,9 +26,9 @@ public abstract class EasyStatement<T> {
    * Die Verarbeitung besteht typischer Weise aus drei Schritten
    * <ol>
    * <li>Parameter auf dem statement setzen, z.B. <code>stmt.setString(1, "Mustermann");</code></li>
-   * <li>Statement ausführen, .z.B <code>stmt.executeQuery();</code><br/>
-   * (Es sind explizit auch executeUpdate() u.ä. verwendbar)</li>
-   * <li>ResultSet / Rückgabewerte verarbeiten</li>
+   * <li>Statement ausfuehren, .z.B <code>stmt.executeQuery();</code><br/>
+   * (Es sind explizit auch executeUpdate() u.ae. verwendbar)</li>
+   * <li>ResultSet / Rueckgabewerte verarbeiten</li>
    * </ol>
    * 
    * @param stmt
@@ -42,10 +42,14 @@ public abstract class EasyStatement<T> {
    * @return
    * @throws SQLException
    */
-  public T execute(Connection con) throws SQLException {
+  public T execute(Connection con, Object ... params) throws SQLException {
     PreparedStatement stmt = null;
     try {
       stmt = con.prepareStatement(sql);
+      int i = 0;
+      for (Object param : params) {
+        stmt.setObject(++i,param);
+      }
       return execute(stmt);
     }
     finally {

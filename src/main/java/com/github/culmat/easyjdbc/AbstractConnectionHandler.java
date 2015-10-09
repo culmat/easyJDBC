@@ -20,7 +20,7 @@ import org.apache.commons.pool2.impl.GenericObjectPool;
 
 
 
-public abstract class AbstractConnectionHandler {
+public abstract class AbstractConnectionHandler implements AutoCloseable {
 	
   public AbstractConnectionHandler() {
 	  Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
@@ -32,7 +32,8 @@ public abstract class AbstractConnectionHandler {
 	  
   }
 
-  protected void close() {
+  @Override
+  public void close() {
 	for(Entry<String, PoolingDataSource> e : pools.entrySet()){
 		  log.info("Shutting down "+e.getKey());
 		  try {
